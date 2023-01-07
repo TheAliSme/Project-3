@@ -1,0 +1,11 @@
+###register request
+post http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+    "username" : "alisme12", 
+    "email" : "ali2000sme@gmail.com" ,
+    "mobile" : "09123610655" ,
+    "password" : "alisme12" ,
+    "confirm_password" : "alisme12"
+}

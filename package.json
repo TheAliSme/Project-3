@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-  "start": "nodemon node index.js"
+    "start": "nodemon node index.js"
   },
   "repository": {
     "type": "git",
@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/TheAliSme/Project-3#readme",
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "express": "^4.18.2",
+    "express-validator": "^6.14.2",
     "moongose": "^1.0.0"
   }
 }

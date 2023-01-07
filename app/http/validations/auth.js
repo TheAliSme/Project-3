@@ -33,6 +33,19 @@ function RigesterValidator(){
         })
     ] 
 }
+function LoginValidation(){
+    return [
+        body("username").notEmpty().withMessage("Username cannot be empty").custom(async username => {
+            const UsernameReges = /^[a-z]+[a-z0-9\_\.]{2,}/gi
+            if(UsernameReges.test(username)){
+                return true
+            }
+            throw "Username is not correct"
+        }),
+        body("password").isLength({min : 6 , max : 24}).withMessage("the password must be at least 6 and at must 24 characters")
+    ]
+}
 module.exports = {
-    RigesterValidator
+    RigesterValidator,
+    LoginValidation
 }

@@ -1,3 +1,14 @@
 ### get user profile
 get http://localhost:3000/user/profile
 Authorization: bearer {{$dotenv token}}
+
+### update user profile
+post http://localhost:3000/user/profile
+Authorization: bearer {{$dotenv token}}
+Content-Type: application/json
+
+{
+    "first_name" : "ali",
+    "last_name" : "samaei",
+    "skils" : ["programing","nodejs","express.js"]
+}

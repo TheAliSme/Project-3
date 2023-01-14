@@ -13,7 +13,7 @@ router.get("/list",CheckLogin,ProjectController.GetAllProject)
 router.get("/:id",CheckLogin,MongoIdValidator(),ExpressValidatorMapper,ProjectController.GetProjectById)
 router.delete("/remove/:id",CheckLogin,MongoIdValidator(),ExpressValidatorMapper,ProjectController.RemoveProject)
 router.put("/update/:id",CheckLogin,MongoIdValidator(),ExpressValidatorMapper,ProjectController.UpdateProject)
-
+router.patch("/update-image/:id",fileupload(),CheckLogin,uploadfile,MongoIdValidator(),ExpressValidatorMapper,ProjectController.UpdateProjectImage)
 module.exports = {
     ProjectRoutes : router
 }

@@ -1,5 +1,6 @@
 const autoBind = require("auto-bind")
 const { ProjectModel } = require("../../models/project")
+const { CreateLinkForFiles } = require("../../modules/functions")
 
 class ProjectController {
     constructor(){
@@ -27,6 +28,9 @@ class ProjectController {
         try {
             const owner = req.user._id
             const projects = await ProjectModel.find({owner})
+            for (const project of projects) {
+                project.image = CreateLinkForFiles(project.image,req)
+            }
             return res.status(200).json({
                 status : 200,
                 success : true,
@@ -46,6 +50,7 @@ class ProjectController {
             const owner = req.user._id
             const projectId =req.params.id
             const project = await this.FindProject(projectId,owner)
+            project.image = CreateLinkForFiles(project.image,req)
             return res.status(200).json({
                 status : 200,
                 success : true,
@@ -71,13 +76,54 @@ class ProjectController {
             next(error)
         }
     }
+    async UpdateProject(req,res,next){
+        try {
+            const owner = req.user._id
+            const projectId =req.params.id
+            const project = await this.FindProject(projectId,owner)
+            const data = {...req.body}
+            Object.entries(data).forEach(([key,value])=>{
+                if(!["title","text","tags"].includes(key)) delete data[key]
+                if([""," ",NaN,null,undefined,0].includes(value)) delete data[key]
+                if(key == "tags" && (data['tags'].constructor === Array)){
+                    data["tags"] = data["tags"].filter(val => {
+                        if(![""," ",NaN,null,undefined,0].includes(val)) return val
+                    })
+                    if(data['tags'].length == 0) delete data['tags']
+                }
+            })
+            const UpdateResult = await ProjectModel.updateOne({_id : projectId},{$set : data})
+            if(UpdateResult.modifiedCount == 0) throw {status : 400, message : "Update was not successfully!."}
+            return res.status(200).json({
+                status : 200,
+                success : true,
+                message : "Update was successfully"
+            })
+        } catch (error) {
+            next(error)
+        }
+    }
+    async UpdateProjectImage(req,res,next){
+        try {
+            const {image} = req.body
+            const owner = req.user._id
+            const projectId =req.params.id
+            await this.FindProject(projectId,owner)
+            const UpdateResult = await ProjectModel.updateOne({_id : projectId},{$set : {image}})
+            if(UpdateResult.modifiedCount == 0) throw {status : 400, message : "Update was not successfully!."}
+            return res.status(200).json({
+                status : 200,
+                success : true,
+                message : "Update was successfully"
+            })
+        } catch (error) {
+            next(error)
+        }
+    }
     GetAllProjectOfTeam(){
 
     }
     GetProjectOfUser(){
-
-    }
-    UpdateProject(){
 
     }
 }

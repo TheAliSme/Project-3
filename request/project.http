@@ -13,7 +13,7 @@ Authorization: bearer {{$dotenv token}}
 Content-Type: application/json
 
 ### get project by id
-get http://localhost:3000/project/63c1a68d90b40a9147f7211c
+get http://localhost:3000/project/63c1af674257a9c5cccd4845
 Authorization: bearer {{$dotenv token}}
 Content-Type: application/json
 
@@ -23,7 +23,13 @@ Authorization: bearer {{$dotenv token}}
 Content-Type: application/json
 
 ### update project by id
-put http://localhost:3000/project/update/
+put http://localhost:3000/project/update/63c1af674257a9c5cccd4845
 Authorization: bearer {{$dotenv token}}
 Content-Type: application/json
+
+{
+    "title" : "",
+    "text" : "",
+    "tags" : ["",""]
+}
 

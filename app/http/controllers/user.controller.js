@@ -5,8 +5,7 @@ class UserController {
     GetProfile(req , res , next){
         try {
             const user = req.user;
-            user.profile_image = CreateLinkForFiles(user.profile_image,req)
-            console.log(user.profile_image)
+            user.profile_image = CreateLinkForFiles(user.profile_image,req);
             return res.status(200).json({
                 status : 200,
                 success : true,

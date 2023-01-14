@@ -10,7 +10,7 @@ const UserSchema = new mongoose.Schema({
     skils : {type : [String], default : []} ,
     teams : {type : [mongoose.Types.ObjectId], default : []} ,
     token : {type : String ,default : ""},
-    profile_image : {type : String} ,
+    profile_image : {type : String,required : false} ,
 },{
     timestamps : true
 })

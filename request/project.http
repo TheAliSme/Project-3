@@ -7,3 +7,23 @@ Content-Type: application/json
     "title" : "title of new project",
     "text" : "text of new project for progect manager of node js"
 }
+### get list od all project
+get http://localhost:3000/project/list
+Authorization: bearer {{$dotenv token}}
+Content-Type: application/json
+
+### get project by id
+get http://localhost:3000/project/63c1a68d90b40a9147f7211c
+Authorization: bearer {{$dotenv token}}
+Content-Type: application/json
+
+### remove project by id
+delete http://localhost:3000/project/remove/63c1a68d90b40a9147f7211c
+Authorization: bearer {{$dotenv token}}
+Content-Type: application/json
+
+### update project by id
+put http://localhost:3000/project/update/
+Authorization: bearer {{$dotenv token}}
+Content-Type: application/json
+

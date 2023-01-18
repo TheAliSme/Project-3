@@ -2,6 +2,7 @@
 get http://localhost:3000/user/profile
 Authorization: bearer {{$dotenv token}}
 Content-Type: application/json
+
 ### update user profile
 post http://localhost:3000/user/profile
 Authorization: bearer {{$dotenv token}}
@@ -12,3 +13,7 @@ Content-Type: application/json
     "last_name" : "samaei",
     "skils" : ["programing","nodejs","express.js"]
 }
+### get all request
+get http://localhost:3000/user/requests
+Authorization: bearer {{$dotenv token}}
+Content-Type: application/json

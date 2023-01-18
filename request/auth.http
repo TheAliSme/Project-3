@@ -3,11 +3,11 @@ post http://localhost:3000/auth/register
 Content-Type: application/json
 
 {
-    "username" : "alisme12", 
-    "email" : "ali2000sme@gmail.com" ,
-    "mobile" : "09123610655" ,
-    "password" : "alisme12" ,
-    "confirm_password" : "alisme12"
+    "username" : "ali15", 
+    "email" : "ali2002sme@gmail.com" ,
+    "mobile" : "09123610657" ,
+    "password" : "alisme14" ,
+    "confirm_password" : "alisme14"
 }
 
 ###login request
@@ -16,6 +16,6 @@ Content-Type: application/json
 Authorization: bearer {{$dotenv token}}
 
 {
-    "username" : "alisme12", 
-    "password" : "alisme12" 
+    "username" : "alisme13", 
+    "password" : "alisme13" 
 }

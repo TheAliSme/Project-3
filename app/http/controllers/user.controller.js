@@ -50,6 +50,18 @@ class UserController {
             next(error)
         }
     }
+    async GetAllRequest(req,res,next){
+        try {
+            const userID = req.user._id
+            const {inviteRequest} = await UserModel.findOne({_id : userID},{inviteRequest : 1})
+            return res.json({
+                request : inviteRequest || []
+            })
+        } catch (error) {
+            next(error)
+        }
+    }
+    
     AddSkils(){
         try {
             

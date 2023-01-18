@@ -13,6 +13,7 @@ router.post("/profile-image",
     ExpressValidatorMapper ,
     CheckLogin,
     UserController.UploadProfileImage)
+router.get("/requests",CheckLogin,UserController.GetAllRequest)
 module.exports = {
     UserRoutes : router
 }

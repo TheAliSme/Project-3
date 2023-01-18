@@ -1,0 +1,35 @@
+### create team
+post http://localhost:3000/team/create
+Authorization: bearer {{$dotenv token}}
+Content-Type: application/json
+
+{
+    "name" : "alisanvgn vmaeiqaviiiiiii",
+    "username" : "smeteamjfvjfygjfgjfgjnfg",
+    "description" : "asfawfefefeafefesf"
+}
+
+### get list of team
+get http://localhost:3000/team/list
+Authorization: bearer {{$dotenv token}}
+Content-Type: application/json
+
+### get team by id
+get http://localhost:3000/team/63c69fe1ac3b1b8f2de00b62
+Authorization: bearer {{$dotenv token}}
+Content-Type: application/json
+
+### get my team 
+get http://localhost:3000/team/me
+Authorization: bearer {{$dotenv token}}
+Content-Type: application/json
+
+### remove team by id 
+delete http://localhost:3000/team/remove/63c69fe1ac3b1b8f2de00b62
+Authorization: bearer {{$dotenv token}}
+Content-Type: application/json
+
+### invite user to team 
+get http://localhost:3000/team/invite/63c6b1b9bcfc232e5a4c7adf/alisme13
+Authorization: bearer {{$dotenv token}}
+Content-Type: application/j

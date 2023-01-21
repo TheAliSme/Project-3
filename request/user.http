@@ -3,6 +3,11 @@ get http://localhost:3000/user/profile
 Authorization: bearer {{$dotenv token}}
 Content-Type: application/json
 
+### get all user
+get http://localhost:3000/user/list
+Authorization: bearer {{$dotenv token}}
+Content-Type: application/json
+
 ### update user profile
 post http://localhost:3000/user/profile
 Authorization: bearer {{$dotenv token}}
@@ -15,5 +20,15 @@ Content-Type: application/json
 }
 ### get all request
 get http://localhost:3000/user/requests
+Authorization: bearer {{$dotenv token}}
+Content-Type: application/json
+
+### get request by status
+get http://localhost:3000/user/requests/accepted
+Authorization: bearer {{$dotenv token}}
+Content-Type: application/json
+
+### accepted  request
+get http://localhost:3000/user/change-status-request/63c7f386e6767ca0c6da7a3e/accepted
 Authorization: bearer {{$dotenv token}}
 Content-Type: application/json

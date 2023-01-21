@@ -55,12 +55,31 @@ class TeamController {
     async GetMyTeams(req,res,next){
         try {
             const userID = req.user._id
-            const teams = await TeamModel.find({
-                $or : [
-                    {owner : userID},
-                    {users : userID}
-                ]
-            })
+            const teams = await TeamModel.aggregate([
+                {
+                    $match : {
+                        $or : [{owner : userID},{users : userID}]
+                    }
+                },{
+                    $lookup : {
+                        from : "users",
+                        localField : "owner",
+                        foreignField : "_id",
+                        as : "owner"
+                    }
+                },{
+                    $project : {
+                        "owner.roles" : 0,
+                        "owner.password" : 0,
+                        "owner.token" : 0,
+                        "owner.teams" : 0,
+                        "owner.skils" : 0,
+                        "owner.inviteRequest" : 0
+                    }
+                },{
+                    $unwind : "$owner"
+                }
+            ])
             return res.status(200).json({
                 status : 200,
                 success : true,
@@ -101,8 +120,29 @@ class TeamController {
             next(error)
         }
     }
-    UpdateTeam(){
-
+    async UpdateTeam(req,res,next){
+        try {
+            const data = {...req.body}
+            Object.keys(data).forEach(key => {
+                if(!data[key]) delete data[key]
+                if([""," ",NaN,null,undefined].includes(data[key])) delete data[key]
+            })
+            const userID = req.user._id
+            const {teamID} = req.params
+            const team = await TeamModel.findOne({owner : userID,_id : teamID})
+            if(!team) throw {status : 404,message : "no team was found with this specification"}
+            const teamUpdateResult = await TeamModel.updateOne({_id : teamID},{
+                $set : data
+            })
+            if(teamUpdateResult.modifiedCount == 0) throw {status : 500,message : "the team profile could not be updated"}
+            return res.status(200).json({
+                status : 200,
+                success : true,
+                message : "the team profile updated"
+            })
+        } catch (error) {
+            next(error)
+        }
     }
     async RemoveTeamById(req,res,next){
         try {

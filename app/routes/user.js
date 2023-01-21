@@ -6,6 +6,7 @@ const { ExpressValidatorMapper } = require("../http/middlewares/checkerrors");
 
 const router = require("express").Router();
 router.get("/profile",CheckLogin, UserController.GetProfile)
+router.get("/list",CheckLogin, UserController.GetListOfUser)
 router.post("/profile",CheckLogin, UserController.EditProfile)
 router.post("/profile-image",
     upload_multer.single("image"),
@@ -14,6 +15,8 @@ router.post("/profile-image",
     CheckLogin,
     UserController.UploadProfileImage)
 router.get("/requests",CheckLogin,UserController.GetAllRequest)
+router.get("/requests/:status",CheckLogin,UserController.GetRequestByStatus)
+router.get("/change-status-request/:id/:status",CheckLogin,UserController.ChangeStatusRequest)
 module.exports = {
     UserRoutes : router
 }

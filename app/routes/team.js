@@ -10,6 +10,7 @@ router.post("/create",CheckLogin,CreateTeamValidator(),ExpressValidatorMapper,Te
 router.get("/list",CheckLogin,TeamController.GetListOfTeam)
 router.get("/me",CheckLogin,TeamController.GetMyTeams)
 router.get("/invite/:teamID/:username",CheckLogin,TeamController.InviteUserToTeam)
+router.put("/update/:teamID",CheckLogin,TeamController.UpdateTeam)
 router.get("/:id",CheckLogin,MongoIdValidator(),ExpressValidatorMapper,TeamController.GetTeamById)
 router.delete("/remove/:id",CheckLogin,MongoIdValidator(),ExpressValidatorMapper,TeamController.RemoveTeamById)
 
